@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view />
+    <transition mode="out-in">
+      <router-view />
+    </transition>
   </div>
 </template>
 
@@ -13,6 +15,11 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;800&family=Poppins&family=Roboto&family=Sora:wght@400;700&display=swap");
+
+:root {
+  --green600: #16a34a;
+  --green700: #15803d;
+}
 
 * {
   margin: 0;
@@ -27,6 +34,34 @@ export default {
   text-align: center;
 }
 
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+.btn {
+  display: block;
+  padding: 10px 30px;
+  background: #f5f5f4;
+  border-radius: 4px;
+  color: #000;
+  text-align: center;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(30, 60, 90, 0.2);
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.btn:hover {
+  background: #d6d3d1;
+  transform: scale(1.05);
+  color: #000;
+  font-weight: 700;
+}
+
 nav {
   padding: 30px;
 }
@@ -37,5 +72,23 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
+
+.v-enter {
+  transform: translate3d(0, -20px, 0);
+}
+
+.v-leave {
+  transform: translate3d(0, 20px, 0);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: all 1s;
 }
 </style>

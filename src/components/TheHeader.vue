@@ -1,7 +1,9 @@
 <template>
   <header>
     <div class="flexcontainer">
-      <img src="../assets/udesc-horizontal.jpg" />
+      <router-link to="/home">
+        <img src="../assets/udesc-horizontal.jpg" />
+      </router-link>
       <ul class="listitems">
         <li>Suporte</li>
       </ul>

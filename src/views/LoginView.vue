@@ -1,4 +1,4 @@
-<template>
+<template v-cloak >
   <div class="login">
     <div class="content">
       <div class="logo">
@@ -23,11 +23,15 @@
 
         <a href="#" class="forgot-password">Esqueceu a senha?</a>
 
-        <button><router-link to="/home">Entrar</router-link></button>
+        <!-- <button class="btn">
+          <router-link to="/home">Entrar</router-link>
+        </button> -->
+
+        <router-link class="btn" to="/home">Entrar</router-link>
 
         <div class="signup-link">
           <p>Não tem uma conta?</p>
-          <a href="#">Cadastra-se</a>
+          <a class="registration" href="#">Cadastra-se</a>
         </div>
       </div>
     </div>
@@ -113,12 +117,8 @@ input:focus {
   color: white;
 }
 
-button {
+.btn {
   margin-top: 70px;
-  height: 40px;
-  font-size: 1.2rem;
-  border-radius: 10px;
-  cursor: pointer;
 }
 
 button:hover {
@@ -139,13 +139,12 @@ p {
   letter-spacing: 1px;
 }
 
-a {
-  color: inherit;
+.registration {
   text-decoration: none;
-  /* font-weight: bold; */
+  color: inherit;
 }
 
-a:hover {
+.registration:hover {
   text-decoration: underline;
   color: white;
 }
