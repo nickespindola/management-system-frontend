@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import SubjectView from '../views/SubjectView.vue'
+import AdminView from '../views/AdminView.vue'
+import ListarUsuario from '../views/usuario/ListarUsuario.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +23,18 @@ const routes = [
     path: '/subject',
     name: 'subject',
     component: SubjectView
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: AdminView,
+    children: [
+      {
+        path: "listar",
+        name: "usuario-editar",
+        component: ListarUsuario
+      },
+    ]
   },
   {
     path: '/about',

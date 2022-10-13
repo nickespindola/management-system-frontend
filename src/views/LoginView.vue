@@ -4,36 +4,21 @@
       <div class="logo">
         <img src="../assets/udesc-vertical.jpg" alt="" />
       </div>
-      <div class="login-container">
+
+      <form class="login-container">
         <h1>Bem-vindo!</h1>
-        <input
-          required
-          type="email"
-          name="email"
-          id="email"
-          placeholder="Email"
-        />
-        <input
-          required
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Senha"
-        />
+        <label for="email">Email</label>
+        <input required type="email" name="email" id="email" />
+        <label for="password">Senha</label>
+        <input required type="password" name="password" id="password" />
 
         <a href="#" class="forgot-password">Esqueceu a senha?</a>
-
-        <!-- <button class="btn">
-          <router-link to="/home">Entrar</router-link>
-        </button> -->
-
         <router-link class="btn" to="/home">Entrar</router-link>
-
         <div class="signup-link">
           <p>Não tem uma conta?</p>
           <a class="registration" href="#">Cadastra-se</a>
         </div>
-      </div>
+      </form>
     </div>
   </div>
 </template>
@@ -58,8 +43,8 @@ export default {
 .content {
   display: flex;
   flex-direction: column;
-  justify-content: start;
   align-items: center;
+  justify-content: space-around;
   background: rgba(0, 0, 0, 1);
   width: 40%;
   box-shadow: 0px 4px 24px rgb(0 0 0 / 80%);
@@ -69,6 +54,7 @@ img {
   height: 400px;
 }
 
+/* ================= FORM ================= */
 .login-container {
   display: flex;
   margin: auto;
@@ -78,14 +64,23 @@ img {
   /* justify-content: space-between; */
   padding: 20px;
   border-radius: 15px;
+  /* 
+  background: lightblue; */
 }
 
 h1 {
-  margin-bottom: 20px;
+  /* margin-bottom: 10px; */
+  color: var(--green600);
+}
+
+label {
+  text-align: left;
+  font-size: 1.2rem;
+  margin-top: 20px;
 }
 
 input {
-  margin-top: 10px;
+  margin-top: -35px;
   border: none;
   border-bottom: 2px solid white;
   height: 40px;
@@ -93,6 +88,8 @@ input {
   background: none;
   outline: none;
   color: white;
+
+  transition: 0.5s;
 }
 
 input::placeholder {
@@ -103,6 +100,7 @@ input::placeholder {
 
 input:focus {
   color: white;
+  margin-top: 10px;
 }
 
 .forgot-password {
@@ -118,7 +116,7 @@ input:focus {
 }
 
 .btn {
-  margin-top: 70px;
+  margin-top: 40px;
 }
 
 button:hover {
@@ -134,7 +132,7 @@ button:hover {
 }
 
 p {
-  color: white;
+  color: var(--green600);
   font-weight: bold;
   letter-spacing: 1px;
 }

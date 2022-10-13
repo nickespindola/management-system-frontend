@@ -19,15 +19,15 @@
           </div>
           <div class="actions">
             <div class="action">
-              <ph-exam :size="100" :color="black" class="icon" />
+              <ph-exam :size="100" color="black" class="icon" />
               <h3>Consultar Notas</h3>
             </div>
             <div class="action">
-              <ph-alarm :size="100" :color="black" class="icon" />
+              <ph-alarm :size="100" color="black" class="icon" />
               <h3>Frequência</h3>
             </div>
             <div class="action">
-              <ph-archive :size="100" :color="black" class="icon" />
+              <ph-archive :size="100" color="black" class="icon" />
               <h3>Requerimentos</h3>
             </div>
           </div>
@@ -62,10 +62,6 @@ export default {
   flex-direction: column;
   width: 70%;
   height: 80vh;
-  /* 
-  border: 3px solid black;
-  border-radius: 6px 36px;
-  padding: 30px; */
 }
 /* ================ TITLE CONTAINER ================ */
 h1 {

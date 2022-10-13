@@ -6,7 +6,7 @@
         <div class="subjects">
           <router-link to="/subject" class="subject-card">
             <div class="subject-img">
-              <ph-graduation-cap :size="100" :color="black" />
+              <ph-graduation-cap :size="100" color="black" />
             </div>
             <div class="subject-text">
               <h2 class="subject-title">Matemática</h2>
@@ -15,7 +15,7 @@
           </router-link>
           <div class="subject-card">
             <div class="subject-img">
-              <ph-graduation-cap :size="100" :color="black" />
+              <ph-graduation-cap :size="100" color="black" />
             </div>
             <div class="subject-text">
               <h2 class="subject-title">Desenvolvimento de pessoas</h2>
@@ -24,7 +24,7 @@
           </div>
           <div class="subject-card">
             <div class="subject-img">
-              <ph-graduation-cap :size="100" :color="black" />
+              <ph-graduation-cap :size="100" color="black" />
             </div>
             <div class="subject-text">
               <h2 class="subject-title">Logística</h2>
@@ -33,7 +33,7 @@
           </div>
           <div class="subject-card">
             <div class="subject-img">
-              <ph-graduation-cap :size="100" :color="black" />
+              <ph-graduation-cap :size="100" color="black" />
             </div>
             <div class="subject-text">
               <h2 class="subject-title">Inteligência de Negócios</h2>
@@ -42,7 +42,7 @@
           </div>
           <div class="subject-card">
             <div class="subject-img">
-              <ph-graduation-cap :size="100" :color="black" />
+              <ph-graduation-cap :size="100" color="black" />
             </div>
             <div class="subject-text">
               <h2 class="subject-title">Teoria Geral da Admnistração</h2>

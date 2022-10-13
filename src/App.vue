@@ -1,15 +1,22 @@
 <template>
   <div id="app">
+    <!-- <TheHeader v-show="teste" /> -->
     <transition mode="out-in">
       <router-view />
     </transition>
+    <!-- <TheFooter v-show="teste" /> -->
   </div>
 </template>
 
 <script>
 // import TheHeader from "./components/TheHeader.vue";
+// import TheFooter from "./components/TheFooter.vue";
 export default {
-  // components: { TheHeader },
+  components: {
+    // TheHeader,
+    // TheFooter
+  },
+  computed: {},
 };
 </script>
 
@@ -34,15 +41,10 @@ export default {
   text-align: center;
 }
 
-a {
-  color: #000;
-  text-decoration: none;
-}
-
 .btn {
   display: block;
   padding: 10px 30px;
-  background: #f5f5f4;
+  background: var(--green600);
   border-radius: 4px;
   color: #000;
   text-align: center;
@@ -56,22 +58,30 @@ a {
 }
 
 .btn:hover {
-  background: #d6d3d1;
+  background: var(--green700);
   transform: scale(1.05);
   color: #000;
   font-weight: 700;
 }
 
-nav {
-  padding: 30px;
+a {
+  color: #000;
+  text-decoration: none;
 }
 
 nav a {
-  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+nav a:hover {
+  color: var(--green600);
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: var(--green600);
+  font-size: 1.5rem;
 }
 
 .v-enter,

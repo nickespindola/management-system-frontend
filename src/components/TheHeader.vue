@@ -1,13 +1,15 @@
 <template>
   <header>
-    <div class="flexcontainer">
+    <nav class="flexcontainer">
       <router-link to="/home">
         <img src="../assets/udesc-horizontal.jpg" />
       </router-link>
       <ul class="listitems">
-        <li>Suporte</li>
+        <li>
+          <router-link to="/about"><p>Sobre</p></router-link>
+        </li>
       </ul>
-    </div>
+    </nav>
   </header>
 </template>
 
@@ -18,6 +20,18 @@ export default {};
 <style scoped>
 img {
   height: 50px;
+  transition: 0.3s;
+}
+
+img:hover {
+  transform: scale(1.2);
+}
+
+header {
+  background-color: black;
+  color: white;
+  height: 10vh;
+  display: flex;
 }
 
 header ul {
@@ -26,9 +40,12 @@ header ul {
   padding: 0;
 }
 
-ul li a {
-  text-decoration: none;
-  color: white;
+p {
+  transition: 0.3s;
+}
+
+p:hover {
+  transform: scale(1.2);
 }
 
 .flexcontainer {
@@ -36,13 +53,6 @@ ul li a {
   margin: auto;
   width: 70%;
   justify-content: space-between;
-}
-
-header {
-  background-color: black;
-  color: white;
-  height: 10vh;
-  display: flex;
 }
 
 header .listitems {
