@@ -8,6 +8,9 @@
         <li>
           <router-link to="/about"><p>Sobre</p></router-link>
         </li>
+        <li>
+          <router-link to="/"><p>Sair</p></router-link>
+        </li>
       </ul>
     </nav>
   </header>
@@ -38,6 +41,11 @@ header ul {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+ul {
+  display: flex;
+  width: 10rem;
 }
 
 p {

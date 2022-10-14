@@ -4,7 +4,7 @@
       <div class="container">
         <h1>Ações:</h1>
         <div class="actions-container">
-          <router-link to="/admin/listar" class="action">
+          <router-link to="admin/listar" class="action">
             <ph-address-book :size="100" color="black" class="icon" />
             <h3>Usuários</h3>
           </router-link>
@@ -69,7 +69,7 @@ h1 {
 }
 
 .action {
-  min-height: 200px;
+  min-height: 250px;
   border: 3px solid black;
   border-radius: 6px 36px;
 
@@ -103,5 +103,13 @@ h1 {
   display: flex;
   padding-top: 10px;
   padding-left: 20px;
+}
+
+h3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 20px;
+  font-size: 2rem;
 }
 </style>

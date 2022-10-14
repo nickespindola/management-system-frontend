@@ -28,13 +28,11 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: AdminView,
-    children: [
-      {
-        path: "listar",
-        name: "usuario-editar",
-        component: ListarUsuario
-      },
-    ]
+  },
+  {
+    path: "/admin/listar",
+    name: "usuario-editar",
+    component: ListarUsuario
   },
   {
     path: '/about',

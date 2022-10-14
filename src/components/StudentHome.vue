@@ -12,6 +12,7 @@
               <li>JARBAS</li>
               <li>Alfonso</li>
               <li>Ananias</li>
+              <li v-on:click="easterEgg()">Hetfield</li>
               <li>Cacilda</li>
               <li>Dorotéia</li>
               <li>Robert</li>
@@ -45,6 +46,12 @@ export default {
     PhExam,
     PhAlarm,
     PhArchive,
+  },
+  methods: {
+    easterEgg() {
+      document.body.innerHTML =
+        "<iframe width='1120' height='630' src='https://www.youtube.com/embed/CvEA0MT2qAA?autoplay=1' title='YouTube video player' frameborder='0' allow='autoplay'></iframe>";
+    },
   },
 };
 </script>
