@@ -5,15 +5,31 @@
         <img src="../assets/udesc-vertical.jpg" alt="" />
       </div>
 
-      <form class="login-container">
+      <form @submit.prevent="login" class="login-container">
         <h1>Bem-vindo!</h1>
-        <label for="email">Email</label>
-        <input required type="email" name="email" id="email" />
+        <label for="cpf">CPF</label>
+        <input
+          required
+          autocomplete="off"
+          type="text"
+          name="cpf"
+          id="cpf"
+          v-model="cpf"
+        />
         <label for="password">Senha</label>
-        <input required type="password" name="password" id="password" />
+        <input
+          required
+          type="password"
+          name="password"
+          id="password"
+          v-model="password"
+        />
 
         <a href="#" class="forgot-password">Esqueceu a senha?</a>
-        <router-link class="btn" to="/home">Entrar</router-link>
+
+        <!-- <router-link class="btn" to="/home" @click="login">Entrar</router-link> -->
+        <button class="btn" type="submit">Entrar</button>
+
         <div class="signup-link">
           <p>Não tem uma conta?</p>
           <a class="registration" href="#">Cadastra-se</a>
@@ -24,7 +40,39 @@
 </template>
 
 <script>
-export default {};
+import BackReqs from "@/req/api/backApi.js";
+
+export default {
+  data() {
+    return {
+      cpf: "",
+      password: "",
+    };
+  },
+
+  methods: {
+    async login(cpf, password) {
+      try {
+        cpf = this.cpf;
+        password = this.password;
+        const req = await BackReqs.userLogin(cpf, password);
+
+        localStorage.setItem("auth", req.headers.authorization);
+
+        if (req.status === 200) {
+          this.$router.push({ name: "admin" });
+        }
+
+        console.log(req);
+      } catch (error) {
+        console.log(error);
+        alert(
+          "Usuário ou senha incorretos! Tá maluco, irmão? Tá na Disney? Tá sentado no colo do Pluto, porra? Coloca os dados direito."
+        );
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -55,14 +103,10 @@ img {
 .login-container {
   display: flex;
   margin: auto;
-  /* margin-left: -200px; */
   flex-direction: column;
   width: 400px;
-  /* justify-content: space-between; */
   padding: 20px;
   border-radius: 15px;
-  /* 
-  background: lightblue; */
 }
 
 h1 {
@@ -87,12 +131,7 @@ input {
   color: white;
 
   transition: 0.5s;
-}
-
-input::placeholder {
-  font-size: 1.2rem;
-  padding-left: 10px;
-  color: white;
+  padding-left: 80px;
 }
 
 input:focus {

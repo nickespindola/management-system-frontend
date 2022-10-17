@@ -43,7 +43,7 @@ export default {
 
 .btn {
   display: block;
-  padding: 10px 30px;
+  padding: 15px 30px;
   background: var(--green600);
   border-radius: 4px;
   color: #000;
