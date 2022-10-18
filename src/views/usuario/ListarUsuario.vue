@@ -3,16 +3,21 @@
     <TheHeader />
     <div class="home">
       <div class="container">
-        <h1>Usuários</h1>
+        <div class="title">
+          <router-link to="/admin"> Home </router-link>
+          <p>></p>
+          <h1>Usuários</h1>
+        </div>
         <table>
           <thead>
             <tr>
-              <th scope="col" @click="getUsers">Nome</th>
+              <th scope="col">Nome</th>
               <th scope="col">Sobrenome</th>
               <th scope="col">CPF</th>
               <th scope="col">E-mail</th>
               <th scope="col">Telefone</th>
               <th scope="col">Endereço</th>
+              <th scope="col">Ações</th>
             </tr>
           </thead>
           <tbody>
@@ -22,7 +27,13 @@
               <td>{{ user.cpf }}</td>
               <td>{{ user.email }}</td>
               <td>{{ user.telephone }}</td>
-              <td class="address">{{ user.address }}</td>
+              <td>{{ user.address }}</td>
+              <td class="actions">
+                <router-link to="/admin/listar/editar">
+                  <ph-pencil class="icon" :size="22" />
+                </router-link>
+                <ph-trash class="icon" :size="22" />
+              </td>
             </tr>
           </tbody>
         </table>
@@ -36,6 +47,7 @@
 import TheHeader from "@/components/TheHeader.vue";
 import TheFooter from "@/components/TheFooter.vue";
 import BackReqs from "@/req/api/backApi";
+import { PhPencil, PhTrash } from "phosphor-vue";
 
 export default {
   data() {
@@ -51,6 +63,8 @@ export default {
   components: {
     TheHeader,
     TheFooter,
+    PhPencil,
+    PhTrash,
   },
 
   methods: {
@@ -59,8 +73,6 @@ export default {
         tokenValue = localStorage.getItem("auth");
         const req = await BackReqs.readUsers(tokenValue);
         this.users = req.data;
-        console.log(req.data);
-        console.log(this.users);
       } catch (error) {
         console.log(error);
       }
@@ -82,27 +94,35 @@ export default {
   align-items: center;
 }
 
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 200px;
+}
+
 .container {
-  /* width: 70%; */
-  /* background: red; */
+  width: 80%;
   height: 80vh;
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
   display: flex;
   font-size: 1.8rem;
-  margin-bottom: 20px;
 }
 
 /* ================== TABLE ================== */
 table {
   border-collapse: collapse;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 24px rgb(0 0 0 / 50%);
 }
 
 th {
-  width: 250px;
   padding: 1.5rem 2rem;
   background: var(--green600);
   text-align: left;
@@ -113,11 +133,21 @@ td {
   padding: 1rem 2rem;
 }
 
-.address {
-  width: 400px;
-}
-
 tr:nth-child(odd) {
   background: #ecedf1;
+}
+
+/* ================== ACTIONS ================== */
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.icon {
+  text-align: center;
+}
+
+.icon:hover {
+  transform: scale(1.2);
 }
 </style>

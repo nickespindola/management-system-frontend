@@ -10,5 +10,6 @@ export default {
     const path = '/users'
     const req = await http.get(path, { headers: { 'Authorization': tokenValue } })
     return req
-  }
+  },
+
 }

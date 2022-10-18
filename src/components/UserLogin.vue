@@ -25,7 +25,11 @@
           v-model="password"
         />
 
-        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+        <a
+          href="https://pt.wikihow.com/Lembrar-uma-Senha-Esquecida"
+          class="forgot-password"
+          >Esqueceu a senha?</a
+        >
 
         <!-- <router-link class="btn" to="/home" @click="login">Entrar</router-link> -->
         <button class="btn" type="submit">Entrar</button>
@@ -67,7 +71,7 @@ export default {
       } catch (error) {
         console.log(error);
         alert(
-          "Usuário ou senha incorretos! Tá maluco, irmão? Tá na Disney? Tá sentado no colo do Pluto, porra? Coloca os dados direito."
+          "Usuário ou senha incorretos! Tá maluco, irmão? Tá na Disney? Tá sentado no colo do Pluto, cara? Coloca os dados direito."
         );
       }
     },
