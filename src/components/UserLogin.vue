@@ -70,9 +70,7 @@ export default {
         console.log(req);
       } catch (error) {
         console.log(error);
-        alert(
-          "Usuário ou senha incorretos! Tá maluco, irmão? Tá na Disney? Tá sentado no colo do Pluto, cara? Coloca os dados direito."
-        );
+        alert("Usuário ou senha incorretos. Por favor, tente outra vez.");
       }
     },
   },

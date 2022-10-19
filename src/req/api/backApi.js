@@ -6,10 +6,23 @@ export default {
     const req = await http.post(path, { cpf: cpf, password: password }, { options: { 'Content-Type': 'application/json' } })
     return req
   },
+
   async readUsers(tokenValue) {
     const path = '/users'
     const req = await http.get(path, { headers: { 'Authorization': tokenValue } })
     return req
   },
+
+  async deleteUser(tokenValue) {
+    const path = `/users/delete/${this._id}`
+    const req = await http.delete(path, { headers: { 'Authorization': tokenValue } })
+    return req
+  },
+
+  async updateUser(tokenValue) {
+    const path = `/users/update/${this._id}`
+    const req = await http.put(path, { headers: { 'Authorization': tokenValue } }, { options: { 'Content-Type': 'application/json' } }, this.user)
+    return req
+  }
 
 }

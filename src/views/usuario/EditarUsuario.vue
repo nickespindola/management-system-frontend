@@ -1,48 +1,69 @@
 <template>
   <section>
-    <router-link to="/admin/listar">
-      <div class="container">
-        <div class="content">
-          <h1>Editar Usuário</h1>
-          <div class="edit-container">
-            <form>
-              <div class="info">
-                <label for="name">Nome</label>
-                <input type="text" :value="ZéPaulo" />
-              </div>
-              <div class="info">
-                <label for="surname">Sobrenome</label>
-                <input type="text" />
-              </div>
-              <div class="info">
-                <label for="email">E-mail</label>
-                <input type="text" />
-              </div>
-              <div class="info">
-                <label for="telephone">Telefone</label>
-                <input type="text" />
-              </div>
-              <div class="info">
-                <label for="address">Endereço</label>
-                <input type="text" />
-              </div>
-              <div class="btns">
-                <button class="btn">Cancelar</button>
-                <button class="btn">Atualizar</button>
-              </div>
-            </form>
-          </div>
+    <div class="container">
+      <div class="content">
+        <h1>Editar Usuário</h1>
+        <div class="edit-container">
+          <form>
+            <div class="info">
+              <label for="name">Nome</label>
+              <input type="text" v-model="user.name" />
+            </div>
+            <div class="info">
+              <label for="surname">Sobrenome</label>
+              <input type="text" v-model="user.surname" />
+            </div>
+            <div class="info">
+              <label for="email">E-mail</label>
+              <input type="text" v-model="user.email" />
+            </div>
+            <div class="info">
+              <label for="telephone">Telefone</label>
+              <input type="text" v-model="user.telephone" />
+            </div>
+            <div class="info">
+              <label for="address">Endereço</label>
+              <input type="text" v-model="user.address" />
+            </div>
+            <div class="btns">
+              <router-link to="/admin/listar" class="btn">Cancelar</router-link>
+              <button class="btn" type="submit" @click="updateUser">
+                Atualizar
+              </button>
+            </div>
+          </form>
         </div>
       </div>
-    </router-link>
+    </div>
+
     <ListarUsuario />
   </section>
 </template>
 
 <script>
 import ListarUsuario from "./ListarUsuario.vue";
+// import BackReqs from "@/req/api/backApi";
+
 export default {
-  components: { ListarUsuario },
+  data() {
+    return {
+      user: {
+        name: "",
+        surname: "",
+        email: "",
+        telephone: "",
+        address: "",
+      },
+    };
+  },
+  components: {
+    ListarUsuario,
+  },
+  methods: {
+    updateUser() {
+      this.$router.push({ name: "usuario-listar" });
+    },
+  },
 };
 </script>
 

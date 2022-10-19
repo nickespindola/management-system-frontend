@@ -32,7 +32,7 @@
                 <router-link to="/admin/listar/editar">
                   <ph-pencil class="icon" :size="22" />
                 </router-link>
-                <ph-trash class="icon" :size="22" />
+                <ph-trash class="icon" :size="22" @click="deleteUser" />
               </td>
             </tr>
           </tbody>
@@ -76,6 +76,11 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    async deleteUser(tokenValue) {
+      tokenValue = localStorage.getItem("auth");
+      const req = await BackReqs.deleteUser(tokenValue);
+      console.log(req);
     },
   },
   computed: {
