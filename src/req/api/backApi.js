@@ -19,9 +19,9 @@ export default {
     return req
   },
 
-  async updateUser(tokenValue) {
+  async updateUser(tokenValue, info) {
     const path = `/users/update/${this._id}`
-    const req = await http.put(path, { headers: { 'Authorization': tokenValue } }, { options: { 'Content-Type': 'application/json' } }, this.user)
+    const req = await http.put(path, info, { headers: { 'Authorization': tokenValue } })
     return req
   }
 
