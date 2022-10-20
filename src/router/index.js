@@ -5,7 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import SubjectView from '../views/SubjectView.vue'
 import AdminView from '../views/AdminView.vue'
 import ListarUsuario from '../views/usuario/ListarUsuario.vue'
-import EditarUsuario from '../views/usuario/EditarUsuario.vue'
+import EditarUsuario from '../components/EditarUsuario.vue'
 
 Vue.use(VueRouter)
 

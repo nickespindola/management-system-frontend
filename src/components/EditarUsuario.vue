@@ -7,47 +7,44 @@
           <form>
             <div class="info">
               <label for="name">Nome</label>
-              <input type="text" v-model="user.name" />
+              <input type="text" v-model="info.name" />
             </div>
             <div class="info">
               <label for="surname">Sobrenome</label>
-              <input type="text" v-model="user.surname" />
+              <input type="text" v-model="info.surname" />
             </div>
+
             <div class="info">
               <label for="email">E-mail</label>
-              <input type="text" v-model="user.email" />
+              <input type="text" v-model="info.email" />
             </div>
             <div class="info">
               <label for="telephone">Telefone</label>
-              <input type="text" v-model="user.telephone" />
+              <input type="text" v-model="info.telephone" />
             </div>
             <div class="info">
               <label for="address">Endereço</label>
-              <input type="text" v-model="user.address" />
+              <input type="text" v-model="info.address" />
             </div>
             <div class="btns">
-              <router-link to="/admin/listar" class="btn">Cancelar</router-link>
-              <button class="btn" type="submit" @click="updateUser">
-                Atualizar
+              <button type="submit" class="btn" @click.prevent="cancelEdition">
+                Cancelar
               </button>
+              <button class="btn" @click.prevent="updateUser">Atualizar</button>
             </div>
           </form>
         </div>
       </div>
     </div>
-
-    <ListarUsuario />
   </section>
 </template>
 
 <script>
-import ListarUsuario from "./ListarUsuario.vue";
-// import BackReqs from "@/req/api/backApi";
-
 export default {
+  name: "EditUser",
   data() {
     return {
-      user: {
+      info: {
         name: "",
         surname: "",
         email: "",
@@ -56,13 +53,25 @@ export default {
       },
     };
   },
-  components: {
-    ListarUsuario,
-  },
+  components: {},
   methods: {
     updateUser() {
-      this.$router.push({ name: "usuario-listar" });
+      console.log(this.info.name);
+      this.$emit("close");
     },
+    cancelEdition() {
+      this.$emit("close");
+    },
+  },
+  props: {
+    userInfo: {},
+  },
+  mounted() {
+    this.info.name = this.userInfo.name;
+    this.info.surname = this.userInfo.surname;
+    this.info.email = this.userInfo.email;
+    this.info.telephone = this.userInfo.telephone;
+    this.info.address = this.userInfo.address;
   },
 };
 </script>

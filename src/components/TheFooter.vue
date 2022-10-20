@@ -16,6 +16,5 @@ footer {
   font-size: 1.2rem;
   color: #fff;
   position: relative;
-  /* top: 75px; */
 }
 </style>

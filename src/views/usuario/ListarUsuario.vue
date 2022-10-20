@@ -1,5 +1,10 @@
 <template>
   <section>
+    <EditarUsuario
+      v-if="activeModel"
+      @close="updateUser(), cancelEdition()"
+      :userInfo="actualUser"
+    />
     <TheHeader />
     <div class="home">
       <div class="container">
@@ -29,9 +34,7 @@
               <td>{{ user.telephone }}</td>
               <td>{{ user.address }}</td>
               <td class="actions">
-                <router-link to="/admin/listar/editar">
-                  <ph-pencil class="icon" :size="22" />
-                </router-link>
+                <ph-pencil class="icon" :size="22" @click="openEdition(user)" />
                 <ph-trash class="icon" :size="22" @click="deleteUser" />
               </td>
             </tr>
@@ -39,20 +42,23 @@
         </table>
       </div>
     </div>
-    <TheFooter />
+    <!-- <TheFooter /> -->
   </section>
 </template>
 
 <script>
 import TheHeader from "@/components/TheHeader.vue";
-import TheFooter from "@/components/TheFooter.vue";
+// import TheFooter from "@/components/TheFooter.vue";
 import BackReqs from "@/req/api/backApi";
 import { PhPencil, PhTrash } from "phosphor-vue";
+import EditarUsuario from "@/components/EditarUsuario.vue";
 
 export default {
   data() {
     return {
       users: [],
+      activeModel: false,
+      actualUser: {},
     };
   },
 
@@ -62,9 +68,10 @@ export default {
 
   components: {
     TheHeader,
-    TheFooter,
+    // TheFooter,
     PhPencil,
     PhTrash,
+    EditarUsuario,
   },
 
   methods: {
@@ -81,6 +88,18 @@ export default {
       tokenValue = localStorage.getItem("auth");
       const req = await BackReqs.deleteUser(tokenValue);
       console.log(req);
+    },
+    openEdition(user) {
+      this.actualUser = user;
+      console.log(this.actualUser);
+      this.activeModel = true;
+    },
+    cancelEdition() {
+      this.activeModel = false;
+    },
+    updateUser() {
+      console.log(this.user.name);
+      this.activeModel = false;
     },
   },
   computed: {
