@@ -13,7 +13,10 @@
               <label for="surname">Sobrenome</label>
               <input type="text" v-model="info.surname" />
             </div>
-
+            <div class="info">
+              <label for="cpf">CPF</label>
+              <input type="text" v-model="info.cpf" />
+            </div>
             <div class="info">
               <label for="email">E-mail</label>
               <input type="text" v-model="info.email" />
@@ -40,6 +43,7 @@
 </template>
 
 <script>
+import BackReqs from "@/req/api/backApi.js";
 export default {
   name: "EditUser",
   data() {
@@ -47,17 +51,29 @@ export default {
       info: {
         name: "",
         surname: "",
+        cpf: "",
         email: "",
         telephone: "",
         address: "",
+        _id: "",
       },
     };
   },
   components: {},
   methods: {
-    updateUser() {
-      console.log(this.info.name);
-      this.$emit("close");
+    async updateUser(tokenValue, info) {
+      try {
+        tokenValue = localStorage.getItem("auth");
+        info = this.info;
+        const req = await BackReqs.updateUser(tokenValue, info);
+
+        if (req.status === 204) {
+          this.$emit("close");
+          location.reload();
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
     cancelEdition() {
       this.$emit("close");
@@ -69,24 +85,22 @@ export default {
   mounted() {
     this.info.name = this.userInfo.name;
     this.info.surname = this.userInfo.surname;
+    this.info.cpf = this.userInfo.cpf;
     this.info.email = this.userInfo.email;
     this.info.telephone = this.userInfo.telephone;
     this.info.address = this.userInfo.address;
+    this.info._id = this.userInfo._id;
   },
 };
 </script>
 
 <style scoped>
 .container {
-  position: absolute;
-  height: 90vh;
-  margin-top: 10vh;
+  position: fixed;
+  top: 0;
+  height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.6);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .content {
@@ -97,7 +111,10 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: -100px;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* ==================== FORM ==================== */
@@ -111,7 +128,7 @@ form {
   display: flex;
   flex-direction: column;
   width: 80%;
-  padding: 10px;
+  padding: 5px;
   text-align: left;
 }
 
