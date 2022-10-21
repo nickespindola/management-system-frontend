@@ -12,6 +12,7 @@ export default {
     const req = await http.get(path, { headers: { 'Authorization': tokenValue } })
     return req
   },
+
   async deleteUser(tokenValue, user) {
     const path = `/users/delete/${user}`;
     const req = await http.delete(path, { headers: { 'Authorization': tokenValue } })
