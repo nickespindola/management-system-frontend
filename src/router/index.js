@@ -6,6 +6,7 @@ import SubjectView from '../views/SubjectView.vue'
 import AdminView from '../views/AdminView.vue'
 import ListarUsuario from '../views/usuario/ListarUsuario.vue'
 import EditarUsuario from '../components/EditarUsuario.vue'
+import CriarUsuario from '../components/CriarUsuario.vue'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: "/admin/listar/editar",
     name: "usuario-editar",
     component: EditarUsuario
+  },
+  {
+    path: "/admin/listar/criar",
+    name: "usuario-criar",
+    component: CriarUsuario
   },
   {
     path: '/about',

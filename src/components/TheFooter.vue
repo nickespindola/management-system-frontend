@@ -10,11 +10,12 @@ export default {};
 
 <style>
 footer {
-  background: var(--green600);
+  background: var(--green500);
   padding: 25px 0;
   text-align: center;
   font-size: 1.2rem;
-  color: #fff;
+  color: #000;
+  font-weight: 700;
   position: relative;
 }
 </style>

@@ -1,9 +1,13 @@
 <template>
   <section>
-    <TheHeader />
     <EditarUsuario
-      v-if="activeModel"
+      v-if="editModel"
       @close="updateUser(), cancelEdition()"
+      :userInfo="actualUser"
+    />
+    <CriarUsuario
+      v-if="createModel"
+      @close="createUser(), cancelCreation()"
       :userInfo="actualUser"
     />
     <div class="home">
@@ -14,7 +18,7 @@
             <p>></p>
             <h1>Usuários</h1>
           </div>
-          <button class="btn">Adicionar Usuário</button>
+          <button class="btn" @click="openCreation">Adicionar Usuário</button>
         </div>
         <table>
           <thead>
@@ -25,7 +29,8 @@
               <th scope="col">E-mail</th>
               <th scope="col">Telefone</th>
               <th scope="col">Endereço</th>
-              <th scope="col">Ações</th>
+              <th scope="col">Editar</th>
+              <th scope="col">Deletar</th>
             </tr>
           </thead>
           <tbody>
@@ -36,9 +41,11 @@
               <td>{{ user.email }}</td>
               <td>{{ user.telephone }}</td>
               <td>{{ user.address }}</td>
-              <td class="actions">
-                <ph-pencil class="icon" :size="22" @click="openEdition(user)" />
-                <ph-trash class="icon" :size="22" @click="deleteUser(user)" />
+              <td class="icon">
+                <ph-pencil :size="25" @click="openEdition(user)" />
+              </td>
+              <td class="icon">
+                <ph-trash :size="25" @click="deleteUser(user)" />
               </td>
             </tr>
           </tbody>
@@ -50,17 +57,18 @@
 </template>
 
 <script>
-import TheHeader from "@/components/TheHeader.vue";
 import TheFooter from "@/components/TheFooter.vue";
 import BackReqs from "@/req/api/backApi";
 import { PhPencil, PhTrash } from "phosphor-vue";
 import EditarUsuario from "@/components/EditarUsuario.vue";
+import CriarUsuario from "@/components/CriarUsuario.vue";
 
 export default {
   data() {
     return {
       users: [],
-      activeModel: false,
+      editModel: false,
+      createModel: false,
       actualUser: {},
     };
   },
@@ -70,11 +78,11 @@ export default {
   },
 
   components: {
-    TheHeader,
     TheFooter,
     PhPencil,
     PhTrash,
     EditarUsuario,
+    CriarUsuario,
   },
 
   methods: {
@@ -93,12 +101,14 @@ export default {
         const tokenValue = localStorage.getItem("auth");
         const id = user._id;
         const req = await BackReqs.deleteUser(tokenValue, id);
-        console.log(req);
 
-        if (req.status === 204) {
-          const deletedUser = this.users.find((user) => user._id === id);
-          const index = this.users.indexOf(deletedUser);
-          this.users.splice(index, 1);
+        const alert = window.confirm("Tem certeza disso?");
+        if (alert) {
+          if (req.status === 204) {
+            const deletedUser = this.users.find((user) => user._id === id);
+            const index = this.users.indexOf(deletedUser);
+            this.users.splice(index, 1);
+          }
         }
       } catch (error) {
         console.log(error);
@@ -107,17 +117,28 @@ export default {
 
     openEdition(user) {
       this.actualUser = user;
-      console.log(this.actualUser);
-      this.activeModel = true;
+      this.editModel = true;
     },
 
     cancelEdition() {
-      this.activeModel = false;
+      this.editModel = false;
+      this.actualUser = {};
     },
 
     updateUser() {
-      console.log(this.user.name);
-      this.activeModel = false;
+      this.editModel = false;
+    },
+
+    openCreation() {
+      this.createModel = true;
+    },
+
+    cancelCreation() {
+      this.createModel = false;
+    },
+
+    createUser() {
+      this.createModel = false;
     },
   },
   computed: {
@@ -173,7 +194,7 @@ table {
 
 th {
   padding: 1.5rem 2rem;
-  background: var(--green600);
+  background: var(--green500);
   text-align: left;
   font-size: 1rem;
 }
@@ -195,10 +216,13 @@ tr:nth-child(odd) {
 
 .icon {
   text-align: center;
+  padding: 0;
+  margin-top: 5px;
 }
 
 .icon:hover {
-  transform: scale(1.2);
+  transform: scale(1.3);
+  color: var(--green500);
 }
 
 /* ================== FOOTER ================== */

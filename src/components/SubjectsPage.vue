@@ -101,13 +101,12 @@ h1 {
 .subject-card {
   min-height: 250px;
   /* min-width: 400px; */
-  border: 3px solid black;
   border-radius: 6px 36px;
 
   background-image: -webkit-linear-gradient(
     135deg,
-    var(--green600) 74%,
-    #fff 26%
+    var(--green500) 74%,
+    var(--green400) 26%
   );
   transition: 0.3s;
 
@@ -118,11 +117,6 @@ h1 {
 }
 
 .subject-card:hover {
-  background-image: -webkit-linear-gradient(
-    135deg,
-    var(--green600) 70%,
-    #fff 30%
-  );
   cursor: pointer;
   letter-spacing: 1px;
   transform: scale(1.05, 1.05);

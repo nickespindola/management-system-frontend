@@ -1,22 +1,27 @@
 <template>
   <div id="app">
-    <!-- <TheHeader v-show="teste" /> -->
+    <transition mode="out-in">
+      <TheHeader v-if="$route.name !== 'login'" />
+    </transition>
     <transition mode="out-in">
       <router-view />
     </transition>
-    <!-- <TheFooter v-show="teste" /> -->
+    <TheFooter v-if="$route.name !== 'login'" />
   </div>
 </template>
 
 <script>
-// import TheHeader from "./components/TheHeader.vue";
-// import TheFooter from "./components/TheFooter.vue";
+import TheHeader from "./components/TheHeader.vue";
+import TheFooter from "./components/TheFooter.vue";
 export default {
   components: {
-    // TheHeader,
-    // TheFooter
+    TheHeader,
+    TheFooter,
   },
   computed: {},
+  created() {
+    console.log(this.$route);
+  },
 };
 </script>
 
@@ -24,6 +29,8 @@ export default {
 @import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;800&family=Poppins&family=Roboto&family=Sora:wght@400;700&display=swap");
 
 :root {
+  --green400: #4ade80;
+  --green500: #22c55e;
   --green600: #16a34a;
   --green700: #15803d;
 }
@@ -44,7 +51,7 @@ export default {
 .btn {
   display: block;
   padding: 15px 30px;
-  background: var(--green600);
+  background: var(--green500);
   border-radius: 4px;
   color: #000;
   text-align: center;

@@ -23,6 +23,12 @@ export default {
     const path = `/users/update/${info._id}`
     const req = await http.put(path, info, { headers: { 'Authorization': tokenValue } })
     return req
+  },
+
+  async createUser(tokenValue, info) {
+    const path = '/users/create'
+    const req = await http.post(path, info, { headers: { 'Authorization': tokenValue } })
+    return req
   }
 
 }

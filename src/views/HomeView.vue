@@ -1,22 +1,16 @@
 <template>
   <section>
-    <TheHeader />
     <SubjectsPage />
-    <TheFooter />
   </section>
 </template>
 
 <script>
-import TheHeader from "@/components/TheHeader.vue";
 import SubjectsPage from "../components/SubjectsPage.vue";
-import TheFooter from "@/components/TheFooter.vue";
 
 export default {
   name: "HomeView",
   components: {
-    TheHeader,
     SubjectsPage,
-    TheFooter,
   },
 };
 </script>

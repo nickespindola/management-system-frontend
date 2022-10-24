@@ -5,20 +5,28 @@
         <h1>Ações:</h1>
         <div class="actions-container">
           <router-link to="admin/listar" class="action">
-            <ph-address-book :size="100" color="black" class="icon" />
+            <ph-users :size="100" color="black" class="icon" />
             <h3>Usuários</h3>
           </router-link>
           <div class="action">
-            <ph-user-plus :size="100" color="black" class="icon" />
-            <h3>Cadastrar Usuário</h3>
+            <ph-chalkboard-teacher :size="100" color="black" class="icon" />
+            <h3>Matrícula Turma</h3>
           </div>
           <div class="action">
-            <ph-pencil-line :size="100" color="black" class="icon" />
-            <h3>Editar Usuário</h3>
+            <ph-address-book :size="100" color="black" class="icon" />
+            <h3>Turma</h3>
           </div>
           <div class="action">
-            <ph-trash :size="100" color="black" class="icon" />
-            <h3>Deletar Usuário</h3>
+            <ph-scroll :size="100" color="black" class="icon" />
+            <h3>Papel</h3>
+          </div>
+          <div class="action">
+            <ph-books :size="100" color="black" class="icon" />
+            <h3>Matéria</h3>
+          </div>
+          <div class="action">
+            <ph-crosshair :size="100" color="black" class="icon" />
+            <h3>Ações</h3>
           </div>
         </div>
       </div>
@@ -27,13 +35,23 @@
 </template>
 
 <script>
-import { PhAddressBook, PhTrash, PhPencilLine, PhUserPlus } from "phosphor-vue";
+import {
+  PhAddressBook,
+  PhScroll,
+  PhChalkboardTeacher,
+  PhUsers,
+  PhCrosshair,
+  PhBooks,
+} from "phosphor-vue";
+
 export default {
   components: {
     PhAddressBook,
-    PhTrash,
-    PhPencilLine,
-    PhUserPlus,
+    PhScroll,
+    PhChalkboardTeacher,
+    PhUsers,
+    PhCrosshair,
+    PhBooks,
   },
 };
 </script>
@@ -62,22 +80,25 @@ h1 {
 
 /* ================ CONTENT CONTAINER ================ */
 .actions-container {
+  margin-top: 40px;
   display: grid;
-  grid-template: 1fr 1fr / 1fr 1fr;
+  grid-template: 1fr 1fr / 1fr 1fr 1fr;
   justify-content: space-around;
-  gap: 30px;
+  gap: 50px;
 }
 
 .action {
   min-height: 250px;
-  border: 3px solid black;
+  /* border: 2px solid black; */
   border-radius: 6px 36px;
 
   background-image: -webkit-linear-gradient(
     135deg,
-    var(--green600) 74%,
-    #fff 26%
+    var(--green500) 70%,
+    var(--green400) 26%
   );
+
+  /* background-color: var(--green400); */
   transition: 0.3s;
 
   display: flex;
@@ -87,11 +108,11 @@ h1 {
 }
 
 .action:hover {
-  background-image: -webkit-linear-gradient(
+  /* background-image: -webkit-linear-gradient(
     135deg,
-    var(--green600) 70%,
+    var(--green600) 68%,
     #fff 30%
-  );
+  ); */
   cursor: pointer;
   letter-spacing: 1px;
   transform: scale(1.05, 1.05);
