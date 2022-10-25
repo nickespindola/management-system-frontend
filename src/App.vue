@@ -13,12 +13,15 @@
 <script>
 import TheHeader from "./components/TheHeader.vue";
 import TheFooter from "./components/TheFooter.vue";
+
 export default {
   components: {
     TheHeader,
     TheFooter,
   },
+
   computed: {},
+
   created() {
     console.log(this.$route);
   },
@@ -106,6 +109,6 @@ nav a.router-link-exact-active {
 
 .v-enter-active,
 .v-leave-active {
-  transition: all 1s;
+  transition: all 0.6s;
 }
 </style>

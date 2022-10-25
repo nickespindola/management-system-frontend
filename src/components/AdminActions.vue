@@ -2,7 +2,7 @@
   <section>
     <div class="home">
       <div class="container">
-        <h1>Ações:</h1>
+        <h1>Boas-vindas</h1>
         <div class="actions-container">
           <router-link to="admin/listar" class="action">
             <ph-users :size="100" color="black" class="icon" />
@@ -24,10 +24,10 @@
             <ph-books :size="100" color="black" class="icon" />
             <h3>Matéria</h3>
           </div>
-          <div class="action">
+          <router-link to="admin/acoes" class="action">
             <ph-crosshair :size="100" color="black" class="icon" />
             <h3>Ações</h3>
-          </div>
+          </router-link>
         </div>
       </div>
     </div>
