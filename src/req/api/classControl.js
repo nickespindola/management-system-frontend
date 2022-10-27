@@ -2,26 +2,26 @@ import http from '../options/baseUrl.js'
 
 export default {
 
-  async createAction(tokenValue, info) {
-    const path = '/actions/create'
+  async createClass(tokenValue, info) {
+    const path = '/classes/create'
     const req = await http.post(path, info, { headers: { 'Authorization': tokenValue } })
     return req
   },
 
-  async readActions(tokenValue) {
-    const path = '/actions'
+  async readClasses(tokenValue) {
+    const path = '/classes'
     const req = await http.get(path, { headers: { 'Authorization': tokenValue } })
     return req
   },
 
-  async updateActions(tokenValue, info) {
-    const path = `/actions/update/${info._id}`
+  async updateClass(tokenValue, info) {
+    const path = `/classes/update/${info._id}`
     const req = await http.put(path, info, { headers: { 'Authorization': tokenValue } })
     return req
   },
 
-  async deleteActions(tokenValue, action) {
-    const path = `/actions/delete/${action}`;
+  async deleteClass(tokenValue, actualClass) {
+    const path = `/classes/delete/${actualClass}`;
     const req = await http.delete(path, { headers: { 'Authorization': tokenValue } })
     return req
   },

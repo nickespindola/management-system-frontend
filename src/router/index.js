@@ -1,11 +1,21 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+
+// LOGIN ROUTE
 import LoginView from '../views/LoginView.vue'
+// TEACHER AND STUDENT HOME PAGE
+import HomeView from '../views/HomeView.vue'
+// STUDENT SUBJECT PAGE
 import SubjectView from '../views/SubjectView.vue'
+// ADMIN HOME PAGE
 import AdminView from '../views/AdminView.vue'
-import ListarUsuario from '../views/usuario/ListarUsuario.vue'
-import ListarAcao from '../views/ActionView.vue'
+// ADMIN ACTIONS
+import ListarUsuario from '../views/adminActions/UserView.vue'
+import ListarAcao from '../views/adminActions/ActionView.vue'
+import ListarMatriculaTurma from '../views/adminActions/EnrolledView.vue'
+import ListarTurma from '../views/adminActions/ClassView.vue'
+import ListarDisciplina from '../views/adminActions/SubjectsView.vue'
+import ListarPapel from '../views/adminActions/RoleView.vue'
 
 Vue.use(VueRouter)
 
@@ -31,7 +41,7 @@ const routes = [
     component: AdminView,
   },
   {
-    path: "/admin/listar",
+    path: "/admin/usuarios",
     name: "usuario-listar",
     component: ListarUsuario
   },
@@ -40,6 +50,27 @@ const routes = [
     name: "acoes-listar",
     component: ListarAcao
   },
+  {
+    path: "/admin/matriculas-turma",
+    name: "matriculas-turma-listar",
+    component: ListarMatriculaTurma
+  },
+  {
+    path: "/admin/turmas",
+    name: "turma-listar",
+    component: ListarTurma
+  },
+  {
+    path: "/admin/materias",
+    name: "disciplina-listar",
+    component: ListarDisciplina
+  },
+  {
+    path: "/admin/papeis",
+    name: "papel-listar",
+    component: ListarPapel
+  },
+
   {
     path: '/about',
     name: 'about',

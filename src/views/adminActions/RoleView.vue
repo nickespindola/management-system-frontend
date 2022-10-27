@@ -6,9 +6,9 @@
           <div class="title-nav">
             <router-link to="/admin"> Home </router-link>
             <p>></p>
-            <h1>Ações</h1>
+            <h1>Papéis</h1>
           </div>
-          <button class="btn">Adicionar Ação</button>
+          <button class="btn">Adicionar Papel</button>
         </div>
         <ComponentsTable
           :headers="tableHeaders"
@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import ComponentsTable from "@/components/ComponentsTable.vue";
-import actions from "@/req/api/actionsControl";
+import ComponentsTable from "@/components/modals/ComponentsTable.vue";
+import roles from "@/req/api/roleControl";
 
 export default {
   components: { ComponentsTable },
@@ -30,23 +30,25 @@ export default {
   data() {
     return {
       tableHeaders: [
-        { label: "ID", value: "_id" },
-        { label: "Nome", value: "name" },
-        { label: "Métodos", value: "methods" },
+        { label: "Usuário da Matrícula", value: "_id" },
+        { label: "Papel", value: "role" },
+        { label: "Turma", value: "classGroup" },
+        { label: "Nota Final", value: "finalGrade" },
+        { label: "Frequência", value: "frequency" },
       ],
       actions: [{}],
     };
   },
 
   mounted() {
-    this.getActions();
+    this.getRoles();
   },
 
   methods: {
-    async getActions(tokenValue) {
+    async getRoles(tokenValue) {
       try {
         tokenValue = localStorage.getItem("auth");
-        const req = await actions.readActions(tokenValue);
+        const req = await roles.readRoles(tokenValue);
         this.actions = req.data;
         console.log(req.data);
       } catch (error) {
@@ -61,13 +63,14 @@ export default {
 .home {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
+  min-height: 90vh;
 }
 .title-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+  gap: 20px;
 }
 .container {
   margin-top: 5vh;

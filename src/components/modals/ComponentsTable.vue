@@ -1,5 +1,15 @@
 <template>
   <section>
+    <!-- <EditarUsuario
+      v-if="editModel"
+      @close="updateUser(), cancelEdition()"
+      :userInfo="actualUser"
+    /> -->
+    <EditModal
+      v-if="editModel"
+      @close="cancelEdition()"
+      :userInfo="actualItem"
+    />
     <table>
       <thead>
         <tr>
@@ -17,10 +27,10 @@
             {{ item[header.value] }}
           </td>
           <td v-if="actions">
-            <ph-pencil
+            <ph-note-pencil
               class="icon"
               :size="25"
-              @click="tableRemoveClick(item)"
+              @click="tableEditClick(item)"
             />
           </td>
           <td v-if="actions">
@@ -33,14 +43,24 @@
 </template>
 
 <script>
-import { PhPencil, PhTrash } from "phosphor-vue";
+import { PhNotePencil, PhTrash } from "phosphor-vue";
+import EditModal from "./EditModal.vue";
 
 export default {
   name: "ComponentsTable",
 
+  data() {
+    return {
+      items: [],
+      actualItem: {},
+      editModel: false,
+    };
+  },
+
   components: {
-    PhPencil,
+    PhNotePencil,
     PhTrash,
+    EditModal,
   },
 
   props: {
@@ -63,6 +83,13 @@ export default {
   methods: {
     tableEditClick(item) {
       console.log(item, "clicou para editar");
+      this.actualItem = item;
+      this.editModel = true;
+    },
+
+    cancelEdition() {
+      this.editModel = false;
+      this.actualUser = {};
     },
 
     tableRemoveClick(item) {
@@ -106,6 +133,7 @@ tr:nth-child(odd) {
 }
 
 .icon:hover {
+  cursor: pointer;
   transform: scale(1.3);
   color: var(--green500);
 }

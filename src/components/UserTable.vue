@@ -42,7 +42,7 @@
               <td>{{ user.telephone }}</td>
               <td>{{ user.address }}</td>
               <td class="icon">
-                <ph-pencil :size="25" @click="openEdition(user)" />
+                <ph-note-pencil :size="25" @click="openEdition(user)" />
               </td>
               <td v-if="user.name !== 'admin'" class="icon">
                 <ph-trash :size="25" @click="deleteUser(user)" />
@@ -56,10 +56,10 @@
 </template>
 
 <script>
-import EditarUsuario from "./EditarUsuario.vue";
-import CriarUsuario from "./CriarUsuario.vue";
+import EditarUsuario from "./modals/EditarUsuario.vue";
+import CriarUsuario from "./modals/CriarUsuario.vue";
 import BackReqs from "@/req/api/backApi";
-import { PhPencil, PhTrash } from "phosphor-vue";
+import { PhNotePencil, PhTrash } from "phosphor-vue";
 
 export default {
   data() {
@@ -76,7 +76,7 @@ export default {
   },
 
   components: {
-    PhPencil,
+    PhNotePencil,
     PhTrash,
     EditarUsuario,
     CriarUsuario,
@@ -152,14 +152,15 @@ export default {
   width: 100%; */
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  min-height: 90vh;
 }
 
 .title-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+  gap: 20px;
 }
 .title {
   display: flex;
@@ -219,6 +220,7 @@ tr:nth-child(odd) {
 }
 
 .icon:hover {
+  cursor: pointer;
   transform: scale(1.3);
   color: var(--green500);
 }

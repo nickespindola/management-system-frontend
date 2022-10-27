@@ -1,9 +1,17 @@
 import http from '../options/baseUrl.js'
 
 export default {
+  // LOGIN
   async userLogin(cpf, password) {
     const path = '/login'
     const req = await http.post(path, { cpf: cpf, password: password }, { options: { 'Content-Type': 'application/json' } })
+    return req
+  },
+
+  // USER
+  async createUser(tokenValue, info) {
+    const path = '/users/create'
+    const req = await http.post(path, info, { headers: { 'Authorization': tokenValue } })
     return req
   },
 
@@ -13,22 +21,16 @@ export default {
     return req
   },
 
-  async deleteUser(tokenValue, user) {
-    const path = `/users/delete/${user}`;
-    const req = await http.delete(path, { headers: { 'Authorization': tokenValue } })
-    return req
-  },
-
   async updateUser(tokenValue, info) {
     const path = `/users/update/${info._id}`
     const req = await http.put(path, info, { headers: { 'Authorization': tokenValue } })
     return req
   },
 
-  async createUser(tokenValue, info) {
-    const path = '/users/create'
-    const req = await http.post(path, info, { headers: { 'Authorization': tokenValue } })
+  async deleteUser(tokenValue, user) {
+    const path = `/users/delete/${user}`;
+    const req = await http.delete(path, { headers: { 'Authorization': tokenValue } })
     return req
-  }
+  },
 
 }

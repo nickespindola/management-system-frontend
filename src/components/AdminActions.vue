@@ -4,27 +4,27 @@
       <div class="container">
         <h1>Boas-vindas</h1>
         <div class="actions-container">
-          <router-link to="admin/listar" class="action">
+          <router-link to="/admin/usuarios" class="action">
             <ph-users :size="100" color="black" class="icon" />
             <h3>Usuários</h3>
           </router-link>
-          <div class="action">
+          <router-link to="/admin/matriculas-turma" class="action">
             <ph-chalkboard-teacher :size="100" color="black" class="icon" />
             <h3>Matrícula Turma</h3>
-          </div>
-          <div class="action">
+          </router-link>
+          <router-link to="/admin/turmas" class="action">
             <ph-address-book :size="100" color="black" class="icon" />
-            <h3>Turma</h3>
-          </div>
-          <div class="action">
-            <ph-scroll :size="100" color="black" class="icon" />
-            <h3>Papel</h3>
-          </div>
-          <div class="action">
+            <h3>Turmas</h3>
+          </router-link>
+          <router-link to="/admin/materias" class="action">
             <ph-books :size="100" color="black" class="icon" />
-            <h3>Matéria</h3>
-          </div>
-          <router-link to="admin/acoes" class="action">
+            <h3>Disciplinas</h3>
+          </router-link>
+          <router-link to="/admin/papeis" class="action">
+            <ph-scroll :size="100" color="black" class="icon" />
+            <h3>Papéis</h3>
+          </router-link>
+          <router-link to="/admin/acoes" class="action">
             <ph-crosshair :size="100" color="black" class="icon" />
             <h3>Ações</h3>
           </router-link>
