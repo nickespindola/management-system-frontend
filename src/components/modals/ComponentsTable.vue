@@ -107,7 +107,7 @@ export default {
     },
 
     tableRemoveClick(item) {
-      console.log(item, "clicou para deletar");
+      // console.log(item, "clicou para deletar");
       this.$emit("deleteItem", item);
     },
   },

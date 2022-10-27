@@ -118,8 +118,8 @@ export default {
 .content {
   min-height: 22rem;
   width: 31.25rem;
-  /* padding-top: 50px;
-  padding-bottom: 50px; */
+  padding-top: 50px;
+  padding-bottom: 50px;
   background: white;
   border-radius: 10px;
   display: flex;
@@ -147,7 +147,8 @@ form {
 }
 
 input {
-  height: 30px;
+  height: 2rem;
+  margin-top: 5px;
 }
 
 .btns {

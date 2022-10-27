@@ -12,8 +12,10 @@
         </div>
         <ComponentsTable
           :headers="tableHeaders"
+          :headersModal="headersModal"
           :data="actions"
           :actions="true"
+          @closeUpdate="updateUser"
         />
       </div>
     </div>
@@ -30,11 +32,13 @@ export default {
   data() {
     return {
       tableHeaders: [
-        { label: "Usuário da Matrícula", value: "_id" },
-        { label: "Papel", value: "role" },
-        { label: "Turma", value: "classGroup" },
-        { label: "Nota Final", value: "finalGrade" },
-        { label: "Frequência", value: "frequency" },
+        { label: "ID do Papel", value: "_id" },
+        { label: "Papel", value: "name" },
+        { label: "Ações", value: "actions" },
+      ],
+      headersModal: [
+        { label: "Papel", value: "name" },
+        { label: "Ação", value: "actions" },
       ],
       actions: [{}],
     };
@@ -51,6 +55,20 @@ export default {
         const req = await roles.readRoles(tokenValue);
         this.actions = req.data;
         console.log(req.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async updateUser(info) {
+      try {
+        const tokenValue = localStorage.getItem("auth");
+        console.log(info);
+        const req = await roles.addActionsInRoles(tokenValue, info);
+
+        if (req.status === 204) {
+          location.reload();
+        }
       } catch (error) {
         console.log(error);
       }

@@ -97,10 +97,10 @@ export default {
       try {
         const tokenValue = localStorage.getItem("auth");
         const id = user._id;
-        const req = await BackReqs.deleteUser(tokenValue, id);
 
-        const alert = window.confirm("Tem certeza disso?");
+        let alert = confirm("Tem certeza disso?");
         if (alert) {
+          const req = await BackReqs.deleteUser(tokenValue, id);
           if (req.status === 204) {
             const deletedUser = this.users.find((user) => user._id === id);
             const index = this.users.indexOf(deletedUser);

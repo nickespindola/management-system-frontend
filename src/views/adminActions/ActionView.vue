@@ -15,7 +15,7 @@
           :headersModal="headersModal"
           :data="actions"
           :actions="true"
-          @closeUpdate="updateUser"
+          @closeUpdate="updateAction"
           @deleteItem="deleteAction"
         />
       </div>
@@ -61,7 +61,7 @@ export default {
       }
     },
 
-    async updateUser(info) {
+    async updateAction(info) {
       try {
         const tokenValue = localStorage.getItem("auth");
         console.log(info);
@@ -75,8 +75,23 @@ export default {
       }
     },
 
-    deleteAction(item) {
-      console.log(item);
+    async deleteAction(item) {
+      try {
+        const tokenValue = localStorage.getItem("auth");
+        const id = item._id;
+
+        let alert = confirm("Tem certeza disso?");
+        if (alert) {
+          const req = await actions.deleteActions(tokenValue, id);
+          if (req.status === 204) {
+            const deletedUser = this.users.find((user) => user._id === id);
+            const index = this.users.indexOf(deletedUser);
+            this.users.splice(index, 1);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };
