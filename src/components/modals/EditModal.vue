@@ -5,9 +5,9 @@
         <h1>Editar Usuário</h1>
         <div class="edit-container">
           <form>
-            <div class="info">
+            <!-- <div class="info">
               <label for="name">Nome</label>
-              <input type="text" v-model="info.name" />
+              <input type="text" v-model="info._id" />
             </div>
             <div class="info">
               <label for="surname">Sobrenome</label>
@@ -28,12 +28,22 @@
             <div class="info">
               <label for="address">Endereço</label>
               <input type="text" v-model="info.address" />
+            </div> -->
+            <div
+              class="info"
+              v-for="(item, index) in headersModal"
+              :key="index"
+            >
+              <label for="telephone">{{ item.label }}</label>
+              <input type="text" v-model="info[item.value]" />
             </div>
             <div class="btns">
               <button type="submit" class="btn" @click.prevent="cancelEdition">
                 Cancelar
               </button>
-              <button class="btn" @click.prevent="updateUser">Atualizar</button>
+              <button type="submit" class="btn" @click.prevent="updatedUser">
+                Atualizar
+              </button>
             </div>
           </form>
         </div>
@@ -48,18 +58,12 @@ export default {
   name: "EditUser",
   data() {
     return {
-      info: {
-        name: "",
-        surname: "",
-        cpf: "",
-        email: "",
-        telephone: "",
-        address: "",
-        _id: "",
-      },
+      info: {},
     };
   },
+
   components: {},
+
   methods: {
     async updateItem(tokenValue, info) {
       try {
@@ -75,21 +79,27 @@ export default {
         console.log(error);
       }
     },
+
+    updatedUser() {
+      this.$emit("closeUpdate", this.info);
+    },
+
     cancelEdition() {
-      this.$emit("close");
+      console.log(this.userInfo);
+      this.$emit("closeCancel");
     },
   },
   props: {
-    userInfo: {},
+    userInfo: Object,
+    headersModal: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
   },
   mounted() {
-    this.info.name = this.userInfo.name;
-    this.info.surname = this.userInfo.surname;
-    this.info.cpf = this.userInfo.cpf;
-    this.info.email = this.userInfo.email;
-    this.info.telephone = this.userInfo.telephone;
-    this.info.address = this.userInfo.address;
-    this.info._id = this.userInfo._id;
+    this.info = { ...this.userInfo };
   },
 };
 </script>
@@ -106,8 +116,10 @@ export default {
 }
 
 .content {
-  height: 37.5rem;
+  min-height: 22rem;
   width: 31.25rem;
+  /* padding-top: 50px;
+  padding-bottom: 50px; */
   background: white;
   border-radius: 10px;
   display: flex;

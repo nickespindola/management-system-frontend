@@ -12,8 +12,11 @@
         </div>
         <ComponentsTable
           :headers="tableHeaders"
+          :headersModal="headersModal"
           :data="actions"
           :actions="true"
+          @closeUpdate="updateUser"
+          @deleteItem="deleteAction"
         />
       </div>
     </div>
@@ -31,6 +34,10 @@ export default {
     return {
       tableHeaders: [
         { label: "ID", value: "_id" },
+        { label: "Nome", value: "name" },
+        { label: "Métodos", value: "methods" },
+      ],
+      headersModal: [
         { label: "Nome", value: "name" },
         { label: "Métodos", value: "methods" },
       ],
@@ -52,6 +59,24 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+
+    async updateUser(info) {
+      try {
+        const tokenValue = localStorage.getItem("auth");
+        console.log(info);
+        const req = await actions.updateActions(tokenValue, info);
+
+        if (req.status === 204) {
+          location.reload();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    deleteAction(item) {
+      console.log(item);
     },
   },
 };

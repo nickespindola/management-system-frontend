@@ -7,8 +7,10 @@
     /> -->
     <EditModal
       v-if="editModel"
-      @close="cancelEdition()"
+      @closeCancel="cancelEdition()"
+      @closeUpdate="updatedUser"
       :userInfo="actualItem"
+      :headersModal="headersModal"
     />
     <table>
       <thead>
@@ -70,9 +72,17 @@ export default {
         return [];
       },
     },
+
     actions: { type: Boolean, default: false },
 
     data: {
+      type: Array,
+      default: () => {
+        return [];
+      },
+    },
+
+    headersModal: {
       type: Array,
       default: () => {
         return [];
@@ -82,18 +92,23 @@ export default {
 
   methods: {
     tableEditClick(item) {
-      console.log(item, "clicou para editar");
-      this.actualItem = item;
       this.editModel = true;
+      this.actualItem = item;
     },
 
     cancelEdition() {
       this.editModel = false;
-      this.actualUser = {};
+      this.actualItem = {};
+    },
+
+    updatedUser(info) {
+      this.editModel = false;
+      this.$emit("closeUpdate", info);
     },
 
     tableRemoveClick(item) {
       console.log(item, "clicou para deletar");
+      this.$emit("deleteItem", item);
     },
   },
 };
