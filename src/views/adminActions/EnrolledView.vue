@@ -12,8 +12,11 @@
         </div>
         <ComponentsTable
           :headers="tableHeaders"
+          :headersModal="headersModal"
           :data="actions"
           :actions="true"
+          @closeUpdate="updateEnrolled"
+          @deleteItem="deleteEnrolled"
         />
       </div>
     </div>
@@ -36,6 +39,14 @@ export default {
         { label: "Nota Final", value: "finalGrade" },
         { label: "Frequência", value: "frequency" },
       ],
+      headersModal: [
+        { label: "Usuário da Matrícula", value: "idUser" },
+        { label: "Papel", value: "role" },
+        { label: "Turma", value: "classGroup" },
+        { label: "Nota Final", value: "finalGrade" },
+        { label: "Frequência", value: "frequency" },
+      ],
+
       actions: [{}],
     };
   },
@@ -51,6 +62,39 @@ export default {
         const req = await enrolleds.readEnrolleds(tokenValue);
         this.actions = req.data;
         console.log(req.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async updateEnrolled(info) {
+      try {
+        const tokenValue = localStorage.getItem("auth");
+        console.log(info);
+        const req = await enrolleds.updateEnrolled(tokenValue, info);
+
+        if (req.status === 204) {
+          location.reload();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async deleteEnrolled(item) {
+      try {
+        const tokenValue = localStorage.getItem("auth");
+        const id = item._id;
+
+        let alert = confirm("Tem certeza disso?");
+        if (alert) {
+          const req = await enrolleds.deleteEnrolled(tokenValue, id);
+          if (req.status === 204) {
+            const deletedUser = this.users.find((user) => user._id === id);
+            const index = this.users.indexOf(deletedUser);
+            this.users.splice(index, 1);
+          }
+        }
       } catch (error) {
         console.log(error);
       }

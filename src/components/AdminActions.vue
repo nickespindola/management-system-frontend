@@ -2,7 +2,7 @@
   <section>
     <div class="home">
       <div class="container">
-        <h1>Boas-vindas</h1>
+        <h1>Boas-vindas, Ademir.</h1>
         <div class="actions-container">
           <router-link to="/admin/usuarios" class="action">
             <ph-users :size="100" color="black" class="icon" />

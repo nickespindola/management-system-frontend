@@ -1,5 +1,6 @@
 <template>
   <section>
+    <CreateModal v-if="createModal" />
     <div class="home">
       <div class="container">
         <div class="title">
@@ -8,7 +9,7 @@
             <p>></p>
             <h1>Ações</h1>
           </div>
-          <button class="btn">Adicionar Ação</button>
+          <button class="btn" @click="openCreation">Adicionar Ação</button>
         </div>
         <ComponentsTable
           :headers="tableHeaders"
@@ -25,10 +26,11 @@
 
 <script>
 import ComponentsTable from "@/components/modals/ComponentsTable.vue";
+import CreateModal from "@/components/modals/CreateModal.vue";
 import actions from "@/req/api/actionsControl";
 
 export default {
-  components: { ComponentsTable },
+  components: { ComponentsTable, CreateModal },
 
   data() {
     return {
@@ -42,6 +44,7 @@ export default {
         { label: "Métodos", value: "methods" },
       ],
       actions: [{}],
+      createModal: false,
     };
   },
 
@@ -92,6 +95,10 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+
+    openCreation() {
+      this.createModal = true;
     },
   },
 };

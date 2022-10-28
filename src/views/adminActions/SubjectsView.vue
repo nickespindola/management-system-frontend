@@ -12,8 +12,11 @@
         </div>
         <ComponentsTable
           :headers="tableHeaders"
+          :headersModal="headersModal"
           :data="actions"
           :actions="true"
+          @closeUpdate="updateSubject"
+          @deleteItem="deleteSubject"
         />
       </div>
     </div>
@@ -30,12 +33,18 @@ export default {
   data() {
     return {
       tableHeaders: [
-        { label: "ID", value: "_id" },
         { label: "Disciplina", value: "name" },
         { label: "Carga Horária", value: "workLoad" },
         { label: "Ementa", value: "menu" },
         { label: "Turmas", value: "classes" },
       ],
+      headersModal: [
+        { label: "Disciplina", value: "name" },
+        { label: "Carga Horária", value: "workLoad" },
+        { label: "Ementa", value: "menu" },
+        { label: "Turmas", value: "classes" },
+      ],
+
       actions: [{}],
     };
   },
@@ -51,6 +60,39 @@ export default {
         const req = await subjects.readSubjects(tokenValue);
         this.actions = req.data;
         console.log(req.data);
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async updateSubject(info) {
+      try {
+        const tokenValue = localStorage.getItem("auth");
+        console.log(info);
+        const req = await subjects.updateSubject(tokenValue, info);
+
+        if (req.status === 204) {
+          location.reload();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async deleteSubject(item) {
+      try {
+        const tokenValue = localStorage.getItem("auth");
+        const id = item._id;
+
+        let alert = confirm("Tem certeza disso?");
+        if (alert) {
+          const req = await subjects.deleteSubject(tokenValue, id);
+          if (req.status === 204) {
+            const deletedUser = this.users.find((user) => user._id === id);
+            const index = this.users.indexOf(deletedUser);
+            this.users.splice(index, 1);
+          }
+        }
       } catch (error) {
         console.log(error);
       }

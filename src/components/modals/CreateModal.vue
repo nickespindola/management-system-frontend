@@ -3,7 +3,7 @@
     <div class="container">
       <div class="content">
         <h1>Editar Usuário</h1>
-        <div class="edit-container">
+        <!-- <div class="edit-container">
           <form>
             <div
               class="info"
@@ -22,7 +22,7 @@
               </button>
             </div>
           </form>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>

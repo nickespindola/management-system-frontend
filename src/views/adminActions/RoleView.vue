@@ -16,6 +16,7 @@
           :data="actions"
           :actions="true"
           @closeUpdate="updateUser"
+          @deleteItem="deleteRole"
         />
       </div>
     </div>
@@ -68,6 +69,25 @@ export default {
 
         if (req.status === 204) {
           location.reload();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    async deleteRole(item) {
+      try {
+        const tokenValue = localStorage.getItem("auth");
+        const id = item._id;
+
+        let alert = confirm("Tem certeza disso?");
+        if (alert) {
+          const req = await roles.deleteRoles(tokenValue, id);
+          if (req.status === 204) {
+            const deletedUser = this.users.find((user) => user._id === id);
+            const index = this.users.indexOf(deletedUser);
+            this.users.splice(index, 1);
+          }
         }
       } catch (error) {
         console.log(error);
