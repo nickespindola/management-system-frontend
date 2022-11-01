@@ -2,8 +2,8 @@
   <section>
     <div class="container">
       <div class="content">
-        <h1>Editar Usuário</h1>
-        <!-- <div class="edit-container">
+        <h1>Criar {{ buttonTitle }}</h1>
+        <div class="edit-container">
           <form>
             <div
               class="info"
@@ -14,24 +14,23 @@
               <input type="text" v-model="info[item.value]" />
             </div>
             <div class="btns">
-              <button type="submit" class="btn" @click.prevent="cancelEdition">
+              <button type="submit" class="btn" @click.prevent="cancelCreation">
                 Cancelar
               </button>
-              <button type="submit" class="btn" @click.prevent="updatedUser">
-                Atualizar
+              <button type="submit" class="btn" @click.prevent="createItem">
+                Criar
               </button>
             </div>
           </form>
-        </div> -->
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import BackReqs from "@/req/api/backApi.js";
 export default {
-  name: "EditUser",
+  name: "CreateUser",
   data() {
     return {
       info: {},
@@ -41,28 +40,12 @@ export default {
   components: {},
 
   methods: {
-    async updateItem(tokenValue, info) {
-      try {
-        tokenValue = localStorage.getItem("auth");
-        info = this.info;
-        const req = await BackReqs.updateUser(tokenValue, info);
-
-        if (req.status === 204) {
-          this.$emit("close");
-          location.reload();
-        }
-      } catch (error) {
-        console.log(error);
-      }
+    createItem() {
+      this.$emit("closeCreatedItem", this.info);
     },
 
-    updatedUser() {
-      this.$emit("closeUpdate", this.info);
-    },
-
-    cancelEdition() {
-      console.log(this.userInfo);
-      this.$emit("closeCancel");
+    cancelCreation() {
+      this.$emit("cancelCreation");
     },
   },
   props: {
@@ -73,6 +56,7 @@ export default {
         return [];
       },
     },
+    buttonTitle: {},
   },
   mounted() {
     this.info = { ...this.userInfo };

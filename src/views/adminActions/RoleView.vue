@@ -2,14 +2,14 @@
   <section>
     <div class="home">
       <div class="container">
-        <div class="title">
+        <!-- <div class="title">
           <div class="title-nav">
             <router-link to="/admin"> Home </router-link>
             <p>></p>
             <h1>Papéis</h1>
           </div>
           <button class="btn">Adicionar Papel</button>
-        </div>
+        </div> -->
         <ComponentsTable
           :headers="tableHeaders"
           :headersModal="headersModal"
@@ -17,6 +17,8 @@
           :actions="true"
           @closeUpdate="updateUser"
           @deleteItem="deleteRole"
+          :pageTitle="pageTitle"
+          :buttonTitle="buttonTitle"
         />
       </div>
     </div>
@@ -42,6 +44,8 @@ export default {
         { label: "Ação", value: "actions" },
       ],
       actions: [{}],
+      pageTitle: "Papéis",
+      buttonTitle: "Papel",
     };
   },
 
@@ -84,9 +88,12 @@ export default {
         if (alert) {
           const req = await roles.deleteRoles(tokenValue, id);
           if (req.status === 204) {
-            const deletedUser = this.users.find((user) => user._id === id);
-            const index = this.users.indexOf(deletedUser);
-            this.users.splice(index, 1);
+            const deletedItem = this.tableHeaders.find(
+              (item) => item._id === id
+            );
+            const index = this.tableHeaders.indexOf(deletedItem);
+            this.tableHeaders.splice(index, 1);
+            location.reload();
           }
         }
       } catch (error) {

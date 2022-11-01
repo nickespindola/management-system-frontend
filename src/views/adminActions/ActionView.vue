@@ -1,16 +1,16 @@
 <template>
   <section>
-    <CreateModal v-if="createModal" />
+    <!-- <CreateModal v-if="createModal" /> -->
     <div class="home">
       <div class="container">
-        <div class="title">
+        <!-- <div class="title">
           <div class="title-nav">
             <router-link to="/admin"> Home </router-link>
             <p>></p>
             <h1>Ações</h1>
           </div>
           <button class="btn" @click="openCreation">Adicionar Ação</button>
-        </div>
+        </div> -->
         <ComponentsTable
           :headers="tableHeaders"
           :headersModal="headersModal"
@@ -18,6 +18,9 @@
           :actions="true"
           @closeUpdate="updateAction"
           @deleteItem="deleteAction"
+          @closeCreation="createAction"
+          :pageTitle="pageTitle"
+          :buttonTitle="buttonTitle"
         />
       </div>
     </div>
@@ -26,11 +29,14 @@
 
 <script>
 import ComponentsTable from "@/components/modals/ComponentsTable.vue";
-import CreateModal from "@/components/modals/CreateModal.vue";
+// import CreateModal from "@/components/modals/CreateModal.vue";
 import actions from "@/req/api/actionsControl";
 
 export default {
-  components: { ComponentsTable, CreateModal },
+  components: {
+    ComponentsTable,
+    // CreateModal,
+  },
 
   data() {
     return {
@@ -45,6 +51,8 @@ export default {
       ],
       actions: [{}],
       createModal: false,
+      pageTitle: "Ações",
+      buttonTitle: "Ação",
     };
   },
 
@@ -64,6 +72,23 @@ export default {
       }
     },
 
+    // Create Action
+    async createAction(info) {
+      try {
+        const tokenValue = localStorage.getItem("auth");
+        console.log(info);
+        const req = await actions.createAction(tokenValue, info);
+
+        console.log(req);
+        if (req.status === 201) {
+          location.reload();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    // Update Action
     async updateAction(info) {
       try {
         const tokenValue = localStorage.getItem("auth");
@@ -78,6 +103,7 @@ export default {
       }
     },
 
+    // Delete Action
     async deleteAction(item) {
       try {
         const tokenValue = localStorage.getItem("auth");
@@ -87,9 +113,12 @@ export default {
         if (alert) {
           const req = await actions.deleteActions(tokenValue, id);
           if (req.status === 204) {
-            const deletedUser = this.users.find((user) => user._id === id);
-            const index = this.users.indexOf(deletedUser);
-            this.users.splice(index, 1);
+            const deletedItem = this.tableHeaders.find(
+              (item) => item._id === id
+            );
+            const index = this.tableHeaders.indexOf(deletedItem);
+            this.tableHeaders.splice(index, 1);
+            location.reload();
           }
         }
       } catch (error) {

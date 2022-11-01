@@ -5,13 +5,34 @@
       @close="updateUser(), cancelEdition()"
       :userInfo="actualUser"
     /> -->
-    <EditModal
-      v-if="editModel"
-      @closeCancel="cancelEdition()"
-      @closeUpdate="updatedUser"
+    <CreateModal
+      v-if="createModel"
+      @cancelCreation="cancelCreation"
+      @closeCreatedItem="createdItem"
       :userInfo="actualItem"
       :headersModal="headersModal"
+      :buttonTitle="buttonTitle"
     />
+    <EditModal
+      v-if="editModel"
+      @closeCancel="cancelEdition"
+      @closeUpdate="updatedItem"
+      :userInfo="actualItem"
+      :headersModal="headersModal"
+      :buttonTitle="buttonTitle"
+    />
+
+    <div class="title">
+      <div class="title-nav">
+        <router-link to="/admin"> Home </router-link>
+        <p>></p>
+        <h1>{{ pageTitle }}</h1>
+      </div>
+      <button class="btn" @click="openCreation">
+        Adicionar {{ buttonTitle }}
+      </button>
+    </div>
+
     <table>
       <thead>
         <tr>
@@ -46,6 +67,7 @@
 
 <script>
 import { PhNotePencil, PhTrash } from "phosphor-vue";
+import CreateModal from "./CreateModal.vue";
 import EditModal from "./EditModal.vue";
 
 export default {
@@ -56,6 +78,7 @@ export default {
       items: [],
       actualItem: {},
       editModel: false,
+      createModel: false,
     };
   },
 
@@ -63,6 +86,7 @@ export default {
     PhNotePencil,
     PhTrash,
     EditModal,
+    CreateModal,
   },
 
   props: {
@@ -88,9 +112,13 @@ export default {
         return [];
       },
     },
+
+    pageTitle: {},
+    buttonTitle: {},
   },
 
   methods: {
+    // Edit Item
     tableEditClick(item) {
       this.editModel = true;
       this.actualItem = item;
@@ -101,13 +129,29 @@ export default {
       this.actualItem = {};
     },
 
-    updatedUser(info) {
+    updatedItem(info) {
       this.editModel = false;
       this.$emit("closeUpdate", info);
     },
 
+    // Create Item
+    openCreation() {
+      this.createModel = true;
+    },
+
+    cancelCreation() {
+      this.createModel = false;
+      console.log("teste");
+    },
+
+    createdItem(info) {
+      this.createModel = false;
+      console.log(info);
+      this.$emit("closeCreation", info);
+    },
+
+    // Remove Item
     tableRemoveClick(item) {
-      // console.log(item, "clicou para deletar");
       this.$emit("deleteItem", item);
     },
   },
@@ -115,6 +159,26 @@ export default {
 </script>
 
 <style scoped>
+/* =============== TITLE =============== */
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.title-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+h1 {
+  font-size: 1.8rem;
+}
+
+/* =============== TABLE =============== */
 table {
   width: 100%;
   border-collapse: collapse;
