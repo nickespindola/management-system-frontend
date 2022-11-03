@@ -28,7 +28,11 @@
         <p>></p>
         <h1>{{ pageTitle }}</h1>
       </div>
-      <button class="btn" @click="openCreation">
+      <button
+        class="btn"
+        @click="openCreation"
+        v-if="buttonTitle !== 'Matrícula'"
+      >
         Adicionar {{ buttonTitle }}
       </button>
     </div>

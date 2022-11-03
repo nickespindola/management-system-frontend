@@ -43,14 +43,25 @@ export default {
         { label: "Papel", value: "name" },
         { label: "Ação", value: "actions" },
       ],
+      tableBody: [],
       actions: [{}],
       pageTitle: "Papéis",
       buttonTitle: "Papel",
     };
   },
 
-  mounted() {
+  async mounted() {
     this.getRoles();
+
+    this.tableBody = this.actions.map((object) => {
+      const newObject = {
+        name: object,
+        actions: object.actions[0],
+      };
+
+      console.log(newObject);
+      return newObject;
+    });
   },
 
   methods: {
@@ -59,7 +70,6 @@ export default {
         tokenValue = localStorage.getItem("auth");
         const req = await roles.readRoles(tokenValue);
         this.actions = req.data;
-        console.log(req.data);
       } catch (error) {
         console.log(error);
       }

@@ -2,14 +2,14 @@
   <section>
     <div class="home">
       <div class="container">
-        <div class="title">
+        <!-- <div class="title">
           <div class="title-nav">
             <router-link to="/admin"> Home </router-link>
             <p>></p>
             <h1>Disciplinas</h1>
           </div>
           <button class="btn">Adicionar Matéria</button>
-        </div>
+        </div> -->
         <ComponentsTable
           :headers="tableHeaders"
           :headersModal="headersModal"
@@ -17,6 +17,9 @@
           :actions="true"
           @closeUpdate="updateSubject"
           @deleteItem="deleteSubject"
+          @closeCreation="createSubject"
+          :pageTitle="pageTitle"
+          :buttonTitle="buttonTitle"
         />
       </div>
     </div>
@@ -46,6 +49,8 @@ export default {
       ],
 
       actions: [{}],
+      pageTitle: "Disciplinas",
+      buttonTitle: "Disciplina",
     };
   },
 
@@ -65,6 +70,23 @@ export default {
       }
     },
 
+    // Create Subject
+    async createSubject(info) {
+      try {
+        const tokenValue = localStorage.getItem("auth");
+        console.log(info);
+        const req = await subjects.createSubject(tokenValue, info);
+
+        console.log(req);
+        if (req.status === 201) {
+          location.reload();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    },
+
+    // Update Subject
     async updateSubject(info) {
       try {
         const tokenValue = localStorage.getItem("auth");
@@ -79,6 +101,7 @@ export default {
       }
     },
 
+    // Delete Subject
     async deleteSubject(item) {
       try {
         const tokenValue = localStorage.getItem("auth");

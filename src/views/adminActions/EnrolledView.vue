@@ -2,14 +2,14 @@
   <section>
     <div class="home">
       <div class="container">
-        <div class="title">
+        <!-- <div class="title">
           <div class="title-nav">
             <router-link to="/admin"> Home </router-link>
             <p>></p>
             <h1>Matrícula Turma</h1>
           </div>
           <button class="btn">Adicionar Matrícula</button>
-        </div>
+        </div> -->
         <ComponentsTable
           :headers="tableHeaders"
           :headersModal="headersModal"
@@ -17,6 +17,8 @@
           :actions="true"
           @closeUpdate="updateEnrolled"
           @deleteItem="deleteEnrolled"
+          :pageTitle="pageTitle"
+          :buttonTitle="buttonTitle"
         />
       </div>
     </div>
@@ -48,6 +50,8 @@ export default {
       ],
 
       actions: [{}],
+      pageTitle: "Matrículas Turma",
+      buttonTitle: "Matrícula",
     };
   },
 
