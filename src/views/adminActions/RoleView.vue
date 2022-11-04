@@ -13,7 +13,7 @@
         <ComponentsTable
           :headers="tableHeaders"
           :headersModal="headersModal"
-          :data="actions"
+          :data="tableBody"
           :actions="true"
           @closeUpdate="updateUser"
           @deleteItem="deleteRole"
@@ -44,24 +44,26 @@ export default {
         { label: "Ação", value: "actions" },
       ],
       tableBody: [],
-      actions: [{}],
+      actions: [],
       pageTitle: "Papéis",
       buttonTitle: "Papel",
     };
   },
 
   async mounted() {
-    this.getRoles();
+    await this.getRoles();
 
     this.tableBody = this.actions.map((object) => {
       const newObject = {
-        name: object,
-        actions: object.actions[0],
+        _id: object._id,
+        name: object.name,
+        actions: object.actions[0].name,
       };
 
-      console.log(newObject);
       return newObject;
     });
+
+    console.log(this.tableBody);
   },
 
   methods: {

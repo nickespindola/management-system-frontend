@@ -13,7 +13,7 @@
         <ComponentsTable
           :headers="tableHeaders"
           :headersModal="headersModal"
-          :data="actions"
+          :data="tableBody"
           :actions="true"
           @closeUpdate="updateSubject"
           @deleteItem="deleteSubject"
@@ -48,14 +48,26 @@ export default {
         { label: "Turmas", value: "classes" },
       ],
 
-      actions: [{}],
+      actions: [],
+      tableBody: [],
       pageTitle: "Disciplinas",
       buttonTitle: "Disciplina",
     };
   },
 
-  mounted() {
-    this.getSubjects();
+  async mounted() {
+    await this.getSubjects();
+
+    this.tableBody = this.actions.map((object) => {
+      const newObject = {
+        name: object.name,
+        workLoad: object.workLoad,
+        menu: object.menu,
+        classes: object.classes.name,
+      };
+
+      return newObject;
+    });
   },
 
   methods: {
